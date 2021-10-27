@@ -1,0 +1,247 @@
+@font-face {
+    font-family: 'iskry';
+    src: url('../assets/fonts/Iskry-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'notto';
+    src: url('../assets/fonts/noto.ttf');
+}
+
+@font-face {
+    font-family: 'test';
+    src: url('../assets/fonts/TWK.ttf');
+}
+
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F1F1F1;
+    height: auto;
+    width: 100vw;
+}
+
+main {
+    width: 100vw;
+    height: auto;
+    position: relative;
+}
+
+/* Barre de */
+/* Navigation */
+
+nav {
+    height: 10vh;
+}
+
+.navbar {
+    height: 100%;
+    display: flex;
+    font-family: notto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.home-link {
+    text-decoration: none;
+    color: #131313;
+    text-transform: uppercase;
+
+    width: 20%;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.nav-links {
+    width: 20%;
+}
+
+.nav-links ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #131313;
+}
+
+/* Title */
+
+h1 {
+    font-family: iskry;
+    text-transform: uppercase;
+    color: #131313;
+    margin: 0;
+    padding: 0;
+    margin-left: 50px;
+    height: auto;
+    position: relative;
+}
+
+
+h1 :nth-child(1) span {
+    font-size: 200px;
+}
+
+h1 :nth-child(2) span {
+    font-size: 150px;
+}
+
+/* Information */
+
+.information {
+    font-family: notto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    text-transform: uppercase;
+    font-size: 13px;
+
+    margin: 0 50px;
+    height: 30vh;
+}
+
+.left, .right {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    width: 6%;
+}
+
+.right .tr-wrap {
+    width: 100%;
+}
+
+.right .tr-wrap span {
+    width: 100%;
+    position: relative;
+}
+
+.right .tr-wrap span a {
+    text-decoration: none;
+    color: #131313;
+    width: 100%;
+}
+
+.right img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+/* Page
+Transition */
+
+.wrapper {
+    height: 100vh;
+    width: 50vw;
+    position: fixed;
+
+    background: #131313;
+}
+
+.w1 {
+    z-index: 2;
+    top: 0;
+    right: 0;
+}
+
+.w2 {
+    top: 0;
+    left: 0;
+}
+
+.tr-wrap {
+    overflow: hidden;
+}
+
+.tr-wrap span {
+    display: inline-block;
+    will-change: transform;
+    transform: translateY(100%);
+}
+
+/* 
+Cursus
+ */
+
+ .cursus-box {
+     max-height: 500px;
+
+     width: 100%;
+     height: 500px;
+     padding: 0 95px;
+
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.cursus {
+     width: 100%;
+     height: 33.3%;
+     display: flex;
+     justify-content: space-between;
+     font-family: test;
+     border-top: 1px solid rgba(19, 19, 19, 0.3);
+}
+
+.c-years {
+     width: 30%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+}
+
+.c-years span {
+     font-size: 43px;
+     font-weight: 300;
+}
+
+.c-diplom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 45%;
+    min-width: 45%;
+}
+
+.c-diplom li {
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.c-diplom .list-number li {
+    font-size: 10px;
+    list-style: none;
+}
+
+.c-diplom .list-text {
+    margin-left: 2%;
+}
+
+.c-diplom .list-text li {
+     list-style: none;
+     text-transform: uppercase;
+     font-size: 15px;
+
+    position: relative;
+}
