@@ -6,7 +6,7 @@ const { Chunk } = require('webpack')
 
 module.exports = {
     entry: {
-        index: path.resolve(__dirname, '../src/js/script.js'),
+        index: path.resolve(__dirname, '../src/js/index/script.js'),
         about: path.resolve(__dirname, '../src/js/about/about.js'),
     },
     output:

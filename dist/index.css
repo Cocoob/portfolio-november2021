@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'iskry';
-    src: url('../assets/fonts/Iskry-Regular.ttf');
+    src: url(assets/fonts/918083d2474f432fcfca021b00379e14.ttf);
 }
 
 @font-face {
     font-family: notto;
-    src: url('../assets/fonts/noto.ttf');
+    src: url(assets/fonts/f0c9f01eaad7d64817ff9c28f28262ef.ttf);
 }
 
 *
@@ -161,3 +161,5 @@ button {
     top: 0;
     left: 0;
 }
+
+/*# sourceMappingURL=index.css.map*/

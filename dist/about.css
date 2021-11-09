@@ -1,16 +1,16 @@
 @font-face {
     font-family: 'iskry';
-    src: url('../assets/fonts/Iskry-Regular.ttf');
+    src: url(assets/fonts/918083d2474f432fcfca021b00379e14.ttf);
 }
 
 @font-face {
     font-family: 'notto';
-    src: url('../assets/fonts/noto.ttf');
+    src: url(assets/fonts/f0c9f01eaad7d64817ff9c28f28262ef.ttf);
 }
 
 @font-face {
     font-family: 'test';
-    src: url('../assets/fonts/TWK.ttf');
+    src: url(assets/fonts/f10b66bae4b333e25c6338fa81edf460.ttf);
 }
 
 
@@ -257,14 +257,6 @@ Cursus
     position: relative;
 }
 
-.c-diplom .list-text li a {
-    color: #131313;
-}
-
-.c-diplom .list-text li a:hover {
-    color: #3883a1;
-}
-
 h2 {
     font-family: iskry;
     text-transform: uppercase;
@@ -309,6 +301,18 @@ h2 {
     position: relative;
 }
 
+/* .container::after {
+    content: 'next';
+    position: absolute;
+    top: 60%;
+    left: 100%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+    height: 50px;
+    text-transform: uppercase;
+    font-family: notto;
+    cursor: pointer;
+} */
 
 .container img {
     height: 500px;
@@ -326,19 +330,10 @@ h2 {
 .container span {
     text-transform: uppercase;
     position: absolute;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.container .s-next {
     right: -10px;
     top: 60%;
-}
-
-.container .s-prev {
-    left: -10px;
-    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .container .active{
@@ -365,3 +360,5 @@ h2 {
     font-family: notto;
     font-weight: 600;
 }
+
+/*# sourceMappingURL=about.css.map*/

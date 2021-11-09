@@ -11,20 +11,19 @@ window.onload = () => {
     tl.to(wrap1, 
         {
             x: innerWidth,
-            duration:3,
+            // duration:3,
         },
-        '0.3')
+        'start')
     .to(wrap2,{
         x: -innerWidth,
-        duration:3
+        // duration:3
     },
-    '0.3'
+    'start'
     )
     information.forEach(inf => {
         tl.to(inf,
             {
                 yPercent: -100,
-                duration: 1
             },
             '1'
         )
