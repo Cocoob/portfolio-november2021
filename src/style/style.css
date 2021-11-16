@@ -4,9 +4,15 @@
 }
 
 @font-face {
-    font-family: notto;
+    font-family: 'notto';
     src: url('../assets/fonts/noto.ttf');
 }
+
+@font-face {
+    font-family: 'test';
+    src: url('../assets/fonts/TWK.ttf');
+}
+
 
 *
 {
@@ -16,51 +22,19 @@
 }
 
 body {
-    background: #F2F2F2;
-}
-
-.alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-
-    background: rgb(32, 32, 32);
-    width: 50vw;
-    height: 50vh;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    text-transform: uppercase;
-    color: #F1F1F1;
-    font-family: notto;
-    box-shadow: 2px 1px 83px -28px rgba(0,0,0,0.75);
--webkit-box-shadow: 2px 1px 83px -28px rgba(0,0,0,0.75);
--moz-box-shadow: 2px 1px 83px -28px rgba(0,0,0,0.75);
-}
-
-.alert .s1{
-    font-family: iskry;
-    font-size: 45px;
-}
-
-.alert a {
-    color: #a2c9ec;
-}
-
-.s2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: #F1F1F1;
+    height: auto;
+    width: 100vw;
 }
 
 main {
     width: 100vw;
-    height: 100vh;
+    height: auto;
     position: relative;
 }
+
+/* Barre de */
+/* Navigation */
 
 nav {
     height: 10vh;
@@ -103,50 +77,82 @@ nav {
     color: #131313;
 }
 
+/* Title */
 
 h1 {
-    text-transform: uppercase;
-    font-size: 190px;
     font-family: iskry;
     font-weight: 200;
-
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.btn {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    padding: 15px 20px;
-
-    font-size: 16px;
     text-transform: uppercase;
-    font-family: notto;
-    letter-spacing: 2px;
-
-    color: #F1F1F1;
-    background: #131313;
+    color: #131313;
+    margin: 0;
+    padding: 0;
+    margin-left: 50px;
+    height: auto;
+    position: relative;
 }
 
-/* About */
-/* Page */
+
+h1 :nth-child(1) span {
+    font-size: 200px;
+}
+
+h1 :nth-child(2) span {
+    font-size: 150px;
+}
+
+/* Information */
+
+.information {
+    font-family: notto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    text-transform: uppercase;
+    font-size: 13px;
+
+    margin: 0 50px;
+    height: 30vh;
+}
+
+.left, .right {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    width: 6%;
+}
+
+.right .tr-wrap {
+    width: 100%;
+}
+
+.right .tr-wrap span {
+    width: 100%;
+    position: relative;
+}
+
+.right .tr-wrap span a {
+    text-decoration: none;
+    color: #131313;
+    width: 100%;
+}
+
+.right img {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 
+/* Page
+Transition */
 
 .wrapper {
     height: 100vh;
     width: 50vw;
-    position: absolute;
+    position: fixed;
 
     background: #131313;
 }
@@ -155,9 +161,142 @@ button {
     z-index: 2;
     top: 0;
     right: 0;
+    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24) ;
 }
 
 .w2 {
     top: 0;
     left: 0;
+    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24);
+}
+
+.tr-wrap {
+    overflow: hidden;
+}
+
+.tr-wrap span {
+    display: inline-block;
+    will-change: transform;
+    transform: translateY(100%);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 
+Cursus
+ */
+
+ .cursus-box {
+     max-height: 500px;
+
+     width: 100%;
+     height: 500px;
+     padding: 0 95px;
+
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.cursus {
+     width: 100%;
+     height: 33.3%;
+     display: flex;
+     justify-content: space-between;
+     font-family: test;
+     border-top: 1px solid rgba(19, 19, 19, 0.3);
+     transition: 1s;
+}
+
+.cursus:hover {
+    will-change: transform;
+    transform: scale(1.04);
+    transition: 1s;
+}
+
+.c-years {
+     width: 30%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+}
+
+.c-years span {
+     font-size: 43px;
+     font-weight: 300;
+}
+
+.c-diplom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 45%;
+    min-width: 45%;
+}
+
+.c-diplom li {
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.c-diplom .list-number li {
+    font-size: 10px;
+    list-style: none;
+}
+
+.c-diplom .list-text {
+    margin-left: 2%;
+}
+
+.c-diplom .list-text li {
+     list-style: none;
+     text-transform: uppercase;
+     font-size: 15px;
+
+    position: relative;
+}
+
+.c-diplom .list-text li a {
+    color: #131313;
+}
+
+.c-diplom .list-text li a:hover {
+    color: #3883a1;
+}
+
+h2 {
+    font-family: iskry;
+    text-transform: uppercase;
+    font-size: 114px;
+    font-weight: 200;
+
+    width: 100%;
+    margin: 15% auto;
+    text-align: center;
+}
+
+/* Description */
+
+.description {
+    margin: auto;
+    margin-bottom: 15%;
+    width: 65%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    width: 350px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text p {
+    font-family: notto;
+    text-transform: uppercase;
+    font-size: 15px;
 }

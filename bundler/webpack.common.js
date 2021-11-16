@@ -5,10 +5,7 @@ const path = require('path')
 const { Chunk } = require('webpack')
 
 module.exports = {
-    entry: {
-        index: path.resolve(__dirname, '../src/js/index/script.js'),
-        about: path.resolve(__dirname, '../src/js/about/about.js'),
-    },
+    entry: path.resolve(__dirname, '../src/js/index/script.js'),
     output:
     {
         filename: 'bundle.[contenthash].js',
@@ -24,15 +21,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
-            filename: 'index.html',
             minify: true,
-            chunks: ['index']
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/about.html'),
-            filename: 'about.html',
-            minify: true,
-            chunks: ['about']
         }),
         new MiniCSSExtractPlugin()
     ],

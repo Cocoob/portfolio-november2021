@@ -1,5 +1,5 @@
 import '../../style/style.css'
-import Highway from '@dogstudio/highway';
-import gsap from 'gsap'
+import transition from './pageTransition'
+import slider from './slider'
 
-
+import image from '../../assets/images/arrow-link.svg'
