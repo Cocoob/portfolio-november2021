@@ -1,38 +1,207 @@
-// import gsap from 'gsap'
+import * as THREE from 'three'
+import gsap from 'gsap'
 
-// const next = document.querySelector('.img-box .s-next')
-// const prev = document.querySelector('.img-box .s-prev')
-// const images = document.querySelectorAll('.img-box img')
-// const nbrSlide = images.length
-// let count = 0
+/**
+ * Base
+ */
+// Canvas
+const canvas = document.querySelector('canvas.webgl')
+
+// Scene
+const scene = new THREE.Scene()
+
+/**
+ * Object
+ */
+// Texture
+const textureLoader = new THREE.TextureLoader()
+const occitanTexture = textureLoader.load('/textures/4.png')
+const occitanTexture1 = textureLoader.load('/textures/4.png')
+const occitanTexture2 = textureLoader.load('/textures/4.png')
+const occitanTexture3 = textureLoader.load('/textures/4.png')
+const occitanTexture4 = textureLoader.load('/textures/4.png')
+
+// gradientTexture.magFilter = THREE.NearestFilter
+
+// Material
+const material = new THREE.MeshBasicMaterial(
+    {
+        map: occitanTexture
+    }
+)
 
 
-// next.addEventListener('click', () => {
+// Mesh
+const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(3, 2, 100),
+    material
+)
 
-//     images[count].classList.remove('active')
+const plane2 = new THREE.Mesh(
+    new THREE.PlaneGeometry(3, 2, 100),
+    material
+)
 
-//     if(count < nbrSlide - 1)
-//     {
-//         count++;
-//     }
-//     else {
-//         count = 0
-//     }
+const plane3 = new THREE.Mesh(
+    new THREE.PlaneGeometry(3, 2, 100),
+    material
+)
 
-//     images[count].classList.add('active')
-// })
+scene.add(plane, plane2, plane3)
+const mesh = [plane,plane2,plane3]
 
-// prev.addEventListener('click', () => {
+// Distance
+const objectDistance = 6
+plane2.position.x = objectDistance * 1
+plane3.position.x = objectDistance * 2
 
-//     images[count].classList.remove('active')
+// Slider
 
-//     if(count > 0)
-//     {
-//         count--;
-//     }
-//     else {
-//         count = nbrSlide - 1
-//     }
 
-//     images[count].classList.add('active')
-// })
+let count = 0
+let nbrSlide = mesh.length
+
+// Number
+const span = document.querySelector('.slide-number')
+span.innerHTML = `0${count+1} / 0${mesh.length}`
+
+
+// Animate camera
+// Suivant
+const next = document.querySelector('.s1')
+next.addEventListener('click', () => {
+    if(count < nbrSlide - 1)
+    {
+        count++;
+
+        gsap.to(
+            camera.position,
+            {
+                duration:1,
+                x: "+=" + 6
+            }
+        )
+    }
+    else {
+        count = 0
+        gsap.to(
+            camera.position,
+            {
+                duration:1,
+                x: 0
+            }
+        )
+    }
+
+    span.innerHTML = `0${count+1} / 0${mesh.length}`
+})
+
+// Précédent
+const prev = document.querySelector('.s2')
+prev.addEventListener('click', () => {
+    if(count > 0)
+    {
+        count--;
+
+        gsap.to(
+            camera.position,
+            {
+                duration:1,
+                x: "-=" + 6
+            }
+        )
+    }
+    else {
+        count = nbrSlide - 1
+        gsap.to(
+            camera.position,
+            {
+                duration:1,
+                x: 12
+            }
+        )
+    }
+
+    span.innerHTML = `0${count+1} / 0${mesh.length}`
+})
+
+
+/**
+ * Lights
+ */
+
+
+/**
+ * Sizes
+ */
+const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight
+}
+
+window.addEventListener('resize', () =>
+{
+    // Update sizes
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+
+    // Update camera
+    camera.aspect = sizes.width / sizes.height
+    camera.updateProjectionMatrix()
+
+    // Update renderer
+    renderer.setSize(sizes.width, sizes.height)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+})
+
+/**
+ * Camera
+ */
+// Base camera
+const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 100)
+camera.position.z = 6
+scene.add(camera)
+
+
+/**
+ * Renderer
+ */
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Scroll
+ */
+
+
+/**
+ * Cursor
+ */
+
+
+/**
+ * Animate
+ */
+const clock = new THREE.Clock()
+let previousTime = 0
+
+const tick = () =>
+{
+    const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
+
+    // Animate camera
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
