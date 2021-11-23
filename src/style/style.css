@@ -25,6 +25,43 @@ body {
     background: #F1F1F1;
     height: auto;
     width: 100vw;
+    --res: calc(0.01 * 10vmin);
+}
+
+
+/* Page
+Transition */
+
+.wrapper {
+    height: 100vh;
+    width: 50vw;
+    position: fixed;
+
+    background: #131313;
+}
+
+.w1 {
+    z-index: 2;
+    top: 0;
+    right: 0;
+    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24) ;
+}
+
+.w2 {
+    top: 0;
+    left: 0;
+    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24);
+}
+
+.tr-wrap {
+    overflow: hidden;
+}
+
+.tr-wrap span {
+    display: inline-block;
+    will-change: transform;
+    transform: translateY(100%);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 main {
@@ -77,29 +114,6 @@ nav {
     color: #131313;
 }
 
-/* Title */
-
-h1 {
-    font-family: iskry;
-    font-weight: 200;
-    text-transform: uppercase;
-    color: #131313;
-    margin: 0;
-    padding: 0;
-    margin-left: 50px;
-    height: auto;
-    position: relative;
-}
-
-
-h1 :nth-child(1) span {
-    font-size: 200px;
-}
-
-h1 :nth-child(2) span {
-    font-size: 150px;
-}
-
 /* Information */
 
 .information {
@@ -121,7 +135,7 @@ h1 :nth-child(2) span {
 }
 
 .right {
-    width: 6%;
+    width: 10%;
 }
 
 .right .tr-wrap {
@@ -145,40 +159,28 @@ h1 :nth-child(2) span {
     right: 0;
 }
 
+/* Title */
 
-/* Page
-Transition */
-
-.wrapper {
-    height: 100vh;
-    width: 50vw;
-    position: fixed;
-
-    background: #131313;
-}
-
-.w1 {
-    z-index: 2;
-    top: 0;
-    right: 0;
-    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24) ;
-}
-
-.w2 {
-    top: 0;
-    left: 0;
-    transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.24);
-}
-
-.tr-wrap {
-    overflow: hidden;
-}
-
-.tr-wrap span {
-    display: inline-block;
+h1 {
+    font-family: iskry;
+    font-weight: 200;
+    text-transform: uppercase;
+    color: #131313;
+    margin: 0;
+    padding: 0;
+    margin-left: 50px;
+    height: auto;
+    position: relative;
     will-change: transform;
-    transform: translateY(100%);
-    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+h1 :nth-child(1) span {
+    font-size: 200px;
+}
+
+h1 :nth-child(2) span {
+    font-size: 150px;
 }
 
 /* 
@@ -315,6 +317,7 @@ h2 {
 /* Project */
 
 .project {
+    max-width: 100vw;
     width: 100%;
     height: 100vh;
     position: relative;
@@ -343,6 +346,7 @@ h2 {
 
 .project-name {
     font-size: 90px;
+    font-weight: 300;
     font-family: iskry;
     text-transform: uppercase;
 }
@@ -386,6 +390,50 @@ h2 {
     font-size: 15px;
 }
 
+.slide-number {
+    display: flex;
+}
+
+.animate-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: fit-content;
+    min-width: 15px;
+}
+
+.animate-text span {
+    display: inline-block;
+    display: none;
+}
+
+.animate-text span.text-in {
+    display: inline-block;
+    animation: textIn 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animate-text span.text-out {
+    animation: textOut 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes textIn{
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes textOut{
+    0%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(-100%);
+    }
+}
+
 .project-description {
     position: absolute;
     top: 0;
@@ -410,7 +458,24 @@ h2 {
 .webgl
 {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     outline: none;
+}
+
+/* 
+RESPONSIVE 
+*/
+
+/* Hero section */
+@media only screen and (max-width:1200px) {
+    
+    h1 :nth-child(1) span {
+        font-size: calc(150 * var(--res));
+    }
+
+    h1 :nth-child(2) span {
+        font-size: calc(150/3 * var(--res));
+    }
 }
