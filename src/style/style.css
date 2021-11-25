@@ -351,18 +351,30 @@ h2 {
     text-transform: uppercase;
 }
 
-.project-name span {
+.animate-title {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.project-name .s1 {
+.a1 {
     top: 95px;
     left: 34px;
 }
 
-.project-name .s2 {
+.a2 {
     bottom: 95px;
     right: 34px;
+}
+
+.animate-title span {
+    display: none;
+}
+
+.animate-title span.text-in {
+    display: inline-block;
+    animation: textIn 2.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .project-image-box {
@@ -416,23 +428,49 @@ h2 {
     animation: textOut 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@keyframes textIn{
-    0%{
-        transform: translateY(100%);
+@-webkit-keyframes textIn {
+    0% {
+      -webkit-transform: translateY(100%);
+              transform: translateY(100%);
     }
-    100%{
-        transform: translateY(0%);
+    100% {
+      -webkit-transform: translateY(0%);
+              transform: translateY(0%);
     }
-}
-
-@keyframes textOut{
-    0%{
-        transform: translateY(0%);
+  }
+  
+  @keyframes textIn {
+    0% {
+      -webkit-transform: translateY(100%);
+              transform: translateY(100%);
     }
-    100%{
-        transform: translateY(-100%);
+    100% {
+      -webkit-transform: translateY(0%);
+              transform: translateY(0%);
     }
-}
+  }
+  
+  @-webkit-keyframes textOut {
+    0% {
+      -webkit-transform: translateY(0%);
+              transform: translateY(0%);
+    }
+    100% {
+      -webkit-transform: translateY(-100%);
+              transform: translateY(-100%);
+    }
+  }
+  
+  @keyframes textOut {
+    0% {
+      -webkit-transform: translateY(0%);
+              transform: translateY(0%);
+    }
+    100% {
+      -webkit-transform: translateY(-100%);
+              transform: translateY(-100%);
+    }
+  }
 
 .project-description {
     position: absolute;
@@ -442,11 +480,22 @@ h2 {
     font-family: notto;
     width: 165px;
     text-transform: uppercase;
+    overflow: hidden;
+}
+
+.project-description span {
+    display: inline-block;
+    display: none;
+}
+
+.project-description span.text-in {
+    display: inline-block;
+    animation: textIn 1.9s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .website-link {
     position: absolute;
-    bottom: 15%;
+    bottom: 5%;
     left: 50%;
     color: #131313;
     font-family: notto;

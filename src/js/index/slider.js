@@ -1,6 +1,9 @@
 import * as THREE from 'three'
 import gsap from 'gsap'
 
+import sliderVertexShader from '../../shaders/slider/vertexSlider.glsl'
+import sliderFragmentShader from '../../shaders/slider/fragmentSlider.glsl'
+
 /**
  * Base
  */
@@ -21,82 +24,68 @@ const scene = new THREE.Scene()
 /**
  * Object
  */
+
 // Texture
 const textureLoader = new THREE.TextureLoader()
 const occitanTexture = textureLoader.load('/textures/4.png')
-const occitanTexture1 = textureLoader.load('/textures/4.png')
-const occitanTexture2 = textureLoader.load('/textures/4.png')
-const occitanTexture3 = textureLoader.load('/textures/4.png')
-const occitanTexture4 = textureLoader.load('/textures/4.png')
+const plenetudeTexture = textureLoader.load('/textures/agricultrice.jpg')
+const tricatelTexture = textureLoader.load('/textures/tricatel.jpg')
+const travelTexture = textureLoader.load('/textures/trip.png')
+const galaxyTexture = textureLoader.load('/textures/galaxy.png')
+const seaTexture = textureLoader.load('/textures/2.png')
+const boxeTexture = textureLoader.load('/textures/boxe.jpg')
 
-// occitanTexture.magFilter = THREE.NearestFilter
-
-// Material
-const material = new THREE.MeshBasicMaterial(
-    {
-        map: occitanTexture
-    }
-)
-
-
-// Mesh
-const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1, 100),
-    material
-)
-
-const plane2 = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1, 100),
-    material
-)
-
-const plane3 = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1, 100),
-    material
-)
-
-scene.add(plane, plane2, plane3)
-const mesh = [plane,plane2,plane3]
-
-// Distance
-const objectDistance = 3
-plane2.position.x = objectDistance * 1
-plane3.position.x = objectDistance * 2
 
 // Slider
-
-
+const spanText = document.querySelector('.animate-text').children
+const spanTitle1 = document.querySelector('.a1').children
+const spanTitle2 = document.querySelector('.a2').children
+const description = document.querySelector('.project-description').children
 let count = 0
-let nbrSlide = mesh.length
 
 // Slide number affichage
-const span = document.querySelector('.animate-text').children
-const spanLen = span.length
+const spanLen = spanText.length
 
-function animateText(){
+function animateText()
+{
     for ( let i = 0; i<spanLen; i++)
     {
-        span[i].classList.remove('text-in')
-        span[i].classList.add('text-out')
+        // Number
+        spanText[i].classList.remove('text-in')
+        spanText[i].classList.add('text-out')
+
+        // Title
+        spanTitle1[i].classList.remove('text-in')
+        spanTitle2[i].classList.remove('text-in')
+
+        // Description
+        description[i].classList.remove('text-in')
     }
 
-    span[count].classList.add('text-in')
+    // Number
+    spanText[count].classList.add('text-in')
 
-    if(span[count].classList.contains('text-in'))
+    // Title
+    spanTitle1[count].classList.add('text-in')
+    spanTitle2[count].classList.add('text-in')
+
+    // Description
+    description[count].classList.add('text-in')
+
+
+    if(spanText[count].classList.contains('text-in'))
     {
-        span[count].classList.remove('text-out')
+        spanText[count].classList.remove('text-out')
     }
 }
-
-// span.innerHTML = `0${count+1} / 0${mesh.length}`
 
 
 // Animate camera
 // Suivant
-const next = document.querySelector('.s1')
+const next = document.querySelector('.project-description')
 next.addEventListener('click', () => {
 
-    if(count < nbrSlide - 1)
+    if(count < spanLen - 1)
     {
         count++;
 
@@ -104,7 +93,7 @@ next.addEventListener('click', () => {
             camera.position,
             {
                 duration:0.5,
-                x: "+=" + 3
+                x: "+=" + (sizes.width/sizes.height)
             }
         )
     }
@@ -119,14 +108,11 @@ next.addEventListener('click', () => {
         )
     }
 
-    // Update slide number
     animateText()
-    // span.innerHTML = `0${count+1} / 0${mesh.length}`
-
 })
 
 // Précédent
-const prev = document.querySelector('.s2')
+const prev = document.querySelector('.a2')
 prev.addEventListener('click', () => {
     if(count > 0)
     {
@@ -136,24 +122,74 @@ prev.addEventListener('click', () => {
             camera.position,
             {
                 duration:0.5,
-                x: "-=" + 3
+                x: "-=" + (sizes.width/sizes.height)
             }
         )
     }
     else {
-        count = nbrSlide - 1
+        count = spanLen - 1
         gsap.to(
             camera.position,
             {
                 duration:0.5,
-                x: 6
+                x: (spanLen-1) * (sizes.width/sizes.height)
             }
         )
     }
 
-    // Update slide number
-    // span.innerHTML = `0${count+1} / 0${mesh.length}`
+    animateText()
 })
+
+// Material
+const material = new THREE.ShaderMaterial(
+    {
+        uniforms:
+        {
+            uTexture: {value : null}
+        },
+        vertexShader: sliderVertexShader,
+        fragmentShader: sliderFragmentShader
+    }
+)
+
+
+// Mesh
+let projects = [...document.querySelectorAll('.animate-title span')]
+let images = [plenetudeTexture,occitanTexture,tricatelTexture,travelTexture,galaxyTexture,seaTexture,boxeTexture]
+images.forEach((img,i) => 
+{
+    let mat = material.clone()
+    mat.uniforms.uTexture.value = img
+    mat.uniforms.uTexture.value.needsUpdate = true
+
+    let geo = new THREE.PlaneGeometry(1.5,1,20,20)
+    let mesh = new THREE.Mesh(geo,mat)
+    scene.add(mesh)
+    mesh.position.x = i * (sizes.width/sizes.height)
+})
+
+// const plane = new THREE.Mesh(
+//     new THREE.PlaneGeometry(1, 1, 100),
+//     material
+// )
+
+// const plane2 = new THREE.Mesh(
+//     new THREE.PlaneGeometry(1, 1, 100),
+//     material
+// )
+
+// const plane3 = new THREE.Mesh(
+//     new THREE.PlaneGeometry(1, 1, 100),
+//     material
+// )
+
+// scene.add(plane, plane2, plane3)
+// const mesh = [plane,plane2,plane3]
+
+// // Distance
+// const objectDistance = 1.501
+// plane2.position.x = objectDistance * 1
+// plane3.position.x = objectDistance * 2
 
 /**
  * Lights
@@ -186,16 +222,17 @@ scene.add(camera)
 const dist = camera.position.z
 const height = 1
 camera.fov = 2*(180/Math.PI)*Math.atan(height/(2*dist))
+camera.updateProjectionMatrix()
 
-if(sizes.width/sizes.height>1){
-    plane.scale.x = camera.aspect
-    plane2.scale.x = camera.aspect
-    plane3.scale.x = camera.aspect
-} else {
-    plane.scale.y = 1 / camera.aspect
-    plane2.scale.y = 1 /camera.aspect
-    plane3.scale.y = 1 /camera.aspect
-}
+// if(sizes.width/sizes.height>1){
+//     plane.scale.x = camera.aspect
+//     plane2.scale.x = camera.aspect
+//     plane3.scale.x = camera.aspect
+// } else {
+//     plane.scale.y = 1 / camera.aspect
+//     plane2.scale.y = 1 /camera.aspect
+//     plane3.scale.y = 1 /camera.aspect
+// }
 
 
 /**
